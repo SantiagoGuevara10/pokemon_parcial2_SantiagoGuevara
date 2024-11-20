@@ -4,25 +4,23 @@ import { Observable } from 'rxjs';
 import { PokemonDetailDto } from './pokemonDetailDto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PokemonService {
-  apiUrl : string = "https://pokeapi.co/api/v2/pokemon/";
+  private apiUrl = 'https://pokeapi.co/api/v2/pokemon';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getPokemons(): PokemonDetailDto[] {
-    let pokemons : PokemonDetailDto[] = [];
-    for (let i = 1; i <= 20; i++) {
-      this.getPokemon(i.toString()).subscribe((pokemon) => {
-        pokemons.push(pokemon);
-      });
-    }
-    return pokemons;
+  getPokemonList(offset = 0, limit = 20): Observable<any> {
+    return this.http.get(`${this.apiUrl}?offset=${offset}&limit=${limit}`);
   }
 
-  getPokemon(id : string): Observable<PokemonDetailDto> {
-    return this.http.get<PokemonDetailDto>(`${this.apiUrl}${id}`);
+  getPokemon(id: number): Observable<PokemonDetailDto> {
+    return this.http.get<PokemonDetailDto>(`${this.apiUrl}/${id}`);
   }
 
+  
+  getPokemonByName(name: string): Observable<PokemonDetailDto> {
+    return this.http.get<PokemonDetailDto>(`${this.apiUrl}/${name}`);
+  }
 }

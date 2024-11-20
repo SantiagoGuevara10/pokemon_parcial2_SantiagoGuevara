@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-3" *ngFor="let pokemon of pokemons">
+    <div class="card" style="cursor: pointer;" [routerLink]="['/pokemon', pokemon.name]">
+      <img
+        [src]="pokemon.sprites?.front_default"
+        class="card-img-top"
+        alt="{{ pokemon.name }}"
+      />
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ pokemon.name }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

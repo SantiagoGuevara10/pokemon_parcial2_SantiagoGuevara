@@ -1,0 +1,21 @@
+<div *ngIf="pokemon">
+  <h2>{{ pokemon.name }}</h2>
+  <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+  <p>ID: {{ pokemon.id }}</p>
+  <p>Altura: {{ pokemon.height }}</p>
+  <p>Peso: {{ pokemon.weight }}</p>
+
+  <h3>Habilidades</h3>
+  <ul>
+    <li *ngFor="let ability of pokemon.abilities">
+      {{ ability.ability.name }}
+    </li>
+  </ul>
+
+  <h3>Tipos</h3>
+  <ul>
+    <li *ngFor="let type of pokemon.types">
+      {{ type.type.name }}
+    </li>
+  </ul>
+</div>
