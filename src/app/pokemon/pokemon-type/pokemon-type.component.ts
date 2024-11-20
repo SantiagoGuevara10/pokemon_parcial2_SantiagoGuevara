@@ -5,6 +5,7 @@ import { PokemonService } from '../pokemon.service';
 @Component({
   selector: 'app-pokemon-type',
   templateUrl: './pokemon-type.component.html',
+  styleUrls: ['./pokemon-type.component.css']
 })
 export class PokemonTypeComponent implements OnInit {
   pokemons: any[] = [];
@@ -17,10 +18,12 @@ export class PokemonTypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.type = this.route.snapshot.params['type'];
-    this.loadPokemonByType();
+    this.loadPokemonsByType();
   }
 
-  loadPokemonByType(): void {
-    
+  loadPokemonsByType(): void {
+    this.pokemonService.getPokemonsByType(this.type).subscribe((response) => {
+      this.pokemons = response.pokemon.map((p: any) => p.pokemon); 
+    });
   }
 }

@@ -23,4 +23,10 @@ export class PokemonService {
   getPokemonByName(name: string): Observable<PokemonDetailDto> {
     return this.http.get<PokemonDetailDto>(`${this.apiUrl}/${name}`);
   }
+  getPokemonsByType(type: string): Observable<any> {
+    return this.http.get(`https://pokeapi.co/api/v2/type/${type}`);
+  }
+  
 }
+
+
